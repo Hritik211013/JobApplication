@@ -1,12 +1,28 @@
 package com.Hritik.JobApplication.job;
 
+import com.Hritik.JobApplication.company.Company;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+@Entity
 public class Job {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
     private String description;
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    @ManyToOne
+    private Company company;
+    /**
+     * This default or no argument constructor is necessary in JPA to allow persistence provider to create instance of
+     * your entity classes automatically when it loads data from the database.
+     */
+    public Job() {
+    }
 
     public Job(long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;
@@ -15,6 +31,14 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public long getId() {
