@@ -1,6 +1,7 @@
 package com.Hritik.JobApplication.company;
 
 import com.Hritik.JobApplication.job.Job;
+import com.Hritik.JobApplication.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -22,6 +23,9 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
+
     public Company() {
     }
 
@@ -29,6 +33,14 @@ public class Company {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public Long getId() {
